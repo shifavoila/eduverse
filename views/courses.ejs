@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Udemy Courses</title>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-gray-800 p-4">
+        <div class="max-w-screen-xl p-2 sm:px-16 mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <a href="/" class="text-white text-lg font-semibold flex items-center bg-white p-0.5 pe-4 rounded">
+                    <img src="https://images-platform.99static.com/UvWW_UabxhcKSoa-E2YXjwDHkRU=/607x286:1393x1072/500x500/top/smart/99designs-contests-attachments/131/131634/attachment_131634405" width="50px" alt="">
+                    <span class="text-black text-xl">Eduverse</span>
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-4 text-lg">
+                <a href="/" class="text-gray-300 hover:text-white">Home</a>
+                <% if (user && user.role !== 'user') { %>  
+                    <a href="/admin/quiz" class="text-gray-300 hover:text-white">Admin</a>
+                <% } %>
+                <a href="/courses" class="text-gray-300 hover:text-white">Courses</a>
+                <a href="/leaderboard" class="text-gray-300 hover:text-white">Results</a>
+                <a href="/profile" class="text-gray-300 hover:text-white">Profile</a>
+                <a href="/logout" class="text-gray-300 hover:text-white">Logout</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-300 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="menu" class="hidden md:hidden flex flex-col space-y-2 mt-2">
+            <a href="#" class="text-gray-300 hover:text-white">Home</a>
+            <a href="#quiz" class="text-gray-300 hover:text-white">Quiz</a>
+            <a href="#results" class="text-gray-300 hover:text-white">Results</a>
+            <a href="#feedback" class="text-gray-300 hover:text-white">Feedback</a>
+            <a href="#profile" class="text-gray-300 hover:text-white">Profile</a>
+        </div>
+    </nav>
+
+    <section class="max-w-screen-xl p-4 sm:px-16 mx-auto">
+        <h1 class="text-3xl font-semibold mb-8 text-center">Udemy Courses</h1>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 justify-center">
+            <% courses.forEach((course, index) => { %>
+                <div class="bg-white rounded-lg shadow-md flex flex-col justify-between">
+                    <div>
+                        <img src="<%= course.image %>" alt="<%= course.name %>" class="w-full h-48 object-cover rounded-md mb-4">
+                        <div class="p-5 pt-0">
+                            <h2 class="text-xl font-semibold mb-2"><%= course.name %></h2>
+                            <p class="text-gray-600 text-sm mb-2"><%= course.category %></p>
+                            <p class="text-gray-800 mb-4">
+                                <%= course.description.length > 200 ? course.description.substring(0, 150) + '...' : course.description %>
+                            </p>
+                            <p class="text-green-600 font-semibold mb-4">
+                                Original Price: $<%= course.actual_price_usd %> | Sale Price: $<%= course.sale_price_usd %>
+                            </p>
+                            <p class="text-red-500 text-sm mb-4">Sale Ends: <%= course.sale_end %></p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between space-x-4 m-5 mt-0">
+                        <a href="<%= course.url %>" target="_blank" class="bg-cyan-700 text-white px-8 py-2 rounded hover:bg-cyan-600 duration-300 w-fit">Enroll Now</a>
+                        <a href="/quiz/<%= index + 1 %>" class="bg-rose-600 text-white px-8 py-2 rounded hover:bg-rose-500 duration-300 w-fit">Practice</a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        
+    </section>   
+    
+</body>
+</html>
