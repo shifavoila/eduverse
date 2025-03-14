@@ -6,6 +6,7 @@ const csrf = require('csurf');
 const authRoutes = require('./routes/authRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 const quizRoutes = require('./routes/quizRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use((req, res, next) => {
 app.use('/', authRoutes);
 app.use('/', courseRoutes);
 app.use('/', quizRoutes);
+app.use('/', contactRoutes);
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');

@@ -12,34 +12,24 @@
     <div class="max-w-screen-xl p-2 sm:px-16 mx-auto flex justify-between items-center">
         <div class="flex items-center space-x-4">
           <a href="/" class="text-white text-lg font-semibold flex items-center bg-white p-0.5 pe-4 rounded">
-              <img src="https://images-platform.99static.com/UvWW_UabxhcKSoa-E2YXjwDHkRU=/607x286:1393x1072/500x500/top/smart/99designs-contests-attachments/131/131634/attachment_131634405" width="50px" alt="">
-              <span class="text-black text-xl">Eduverse</span>
-          </a>
+            <img src="https://images-platform.99static.com/UvWW_UabxhcKSoa-E2YXjwDHkRU=/607x286:1393x1072/500x500/top/smart/99designs-contests-attachments/131/131634/attachment_131634405" width="50px" alt="">
+            <span class="text-black text-xl">Eduverse</span>
+        </a>
         </div>
         <div class="hidden md:flex items-center space-x-4 text-lg">
             <a href="/" class="text-gray-300 hover:text-white">Home</a>
             <% if (user && user.role !== 'user') { %>  
             <a href="/admin/quiz" class="text-gray-300 hover:text-white">Admin</a>
+            <a href="/contacts" class="text-gray-300 hover:text-white">Queries</a>
             <% } %>
             <a href="/courses" class="text-gray-300 hover:text-white">Courses</a>
             <a href="/leaderboard" class="text-gray-300 hover:text-white">Results</a>
-            <a href="/profile" class="text-gray-300 hover:text-white">Profile</a>
+            <a href="/contact" class="text-gray-300 hover:text-white">Contact Us</a>
+            <a href="/profile" class="text-gray-300 hover:text-white">Profile
+              <span class="bg-gray-700 text-white px-2 rounded mx-1 text-sm py-1"><%= user.name %></span>
+            </a>
             <a href="/logout" class="text-gray-300 hover:text-white">Logout</a>
         </div>
-        <div class="md:hidden">
-            <button id="menu-toggle" class="text-gray-300 focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-            </button>
-        </div>
-    </div>
-    <div id="menu" class="hidden md:hidden flex flex-col space-y-2 mt-2">
-        <a href="#" class="text-gray-300 hover:text-white">Home</a>
-        <a href="#quiz" class="text-gray-300 hover:text-white">Quiz</a>
-        <a href="#results" class="text-gray-300 hover:text-white">Results</a>
-        <a href="#feedback" class="text-gray-300 hover:text-white">Feedback</a>
-        <a href="#profile" class="text-gray-300 hover:text-white">Profile</a>
     </div>
   </nav>
 

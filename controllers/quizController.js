@@ -110,10 +110,17 @@ exports.listQuiz = (req, res) => {
   if (!req.session.user) {
     return res.redirect('/login');
   }
-  if(req.session.user.role === "user") {
+  if (req.session.user.role === "user") {
     return res.redirect('/');
   }
-  const query = 'SELECT * FROM quizzes';
+
+  const query = `
+    SELECT q.id, q.quiz_name, q.description, 
+           COUNT(qa.id) AS attempts 
+    FROM quizzes q
+    LEFT JOIN quiz_attempts qa ON q.id = qa.quiz_id
+    GROUP BY q.id
+  `;
 
   db.query(query, (err, results) => {
     if (err) {
@@ -121,7 +128,6 @@ exports.listQuiz = (req, res) => {
       return res.status(500).send('Server error');
     }
 
-    // Render the view and pass the quizzes to the frontend
     res.render('quiz', { quizzes: results, user: req.session.user, csrfToken: req.csrfToken() });
   });
 };

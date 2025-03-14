@@ -10,16 +10,26 @@
 <body class="bg-gray-100 flex items-center justify-center h-[140vh]">
   <div class="w-full max-w-lg my-20 p-6 bg-white rounded-lg shadow-lg">
     <h1 class="text-2xl font-semibold mb-6 text-center text-gray-800">Register</h1>
+    
     <form action="/register" method="POST" class="space-y-4">
       <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+      
+    <% if (error) { %>
+      <div class="mb-4 p-3 text-sm text-red-700 bg-red-100 rounded-md">
+        <%= error %>
+      </div>
+    <% } %>
       <div>
         <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
         <input type="text" id="name" name="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
       </div>
       <div>
         <label for="phone" class="block text-sm font-medium text-gray-700">Phone:</label>
-        <input type="text" id="phone" name="phone" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-      </div>
+        <input type="text" id="phone" name="phone" required maxlength="10" 
+          pattern="\d{10}" inputmode="numeric"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+      </div>      
       <div>
         <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
         <input type="email" id="email" name="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
@@ -38,14 +48,25 @@
         </select>
       </div>
       <div>
+        <label for="dob" class="block text-sm font-medium text-gray-700">Date Of Birth:</label>
+        <input type="date" id="dob" name="dob" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+      </div>
+      <div>
         <label for="location" class="block text-sm font-medium text-gray-700">Location:</label>
         <input type="text" id="location" name="location" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
       </div>
       <button type="submit" class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Register</button>
     </form>
     <p class="mt-4 text-center text-sm text-gray-600">
-      <a href="/login" class="text-blue-500 hover:text-blue-400">Already have an account? Login here.</a>
+      <a href="/login" class="text-blue-500 hover:text-blue-400 block">Already have an account? Login here.</a>
+      <a href="/forgot" class="text-blue-500 hover:text-blue-400 block">Forgot Password? Click here.</a>
     </p>
   </div>
+
+  <script>
+    document.getElementById('phone').addEventListener('input', function (e) {
+      this.value = this.value.replace(/\D/g, '').slice(0, 10);
+    });
+  </script>
 </body>
 </html>
