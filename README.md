@@ -97,6 +97,15 @@ CREATE TABLE quiz_attempts (
     score DECIMAL(5,2) NULL,  
     attempt_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP  
 );
+
+-- Contacts Table
+CREATE TABLE contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 ```
 
 ### 4️⃣ Start the Server  
