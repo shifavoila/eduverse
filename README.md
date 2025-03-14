@@ -55,7 +55,8 @@ CREATE TABLE users (
     phone VARCHAR(20) NULL,  
     location VARCHAR(255) NULL,  
     gender VARCHAR(20) NULL,  
-    role VARCHAR(20) DEFAULT 'user'  
+    role VARCHAR(20) DEFAULT 'user' ,
+    dob date
 );
 
 -- Courses Table  
